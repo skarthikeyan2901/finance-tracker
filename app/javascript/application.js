@@ -16,3 +16,18 @@ jQuery("#form-submit-button").on("click", function(event) {
     }
   })
 })
+
+jQuery("#form-submit-button-friends").on("click", function(event) {
+  // event.preventDefault();
+  var formButtonElement = jQuery("#form-submit-button-friends");
+  var formInput = jQuery("#user-input");
+  var friend = formInput.val();
+  jQuery.ajax({
+    url: formButtonElement.data("url"),
+    data: { friend: friend },
+    method: 'GET',
+    success: function(result) {
+      console.log(result)
+    }
+  })
+})

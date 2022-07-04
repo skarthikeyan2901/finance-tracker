@@ -1,4 +1,23 @@
-<h1>My Friends</h1>
+<h1>Friends</h1>
+
+<div class="search-area">
+  <h3>Search users</h3>
+  <%= form_tag "javascript:void(0)", remote: true, method: :get do %>
+    <div class="form-group row">
+      <div class="col-sm-9 no-right-padding">
+        <%= text_field_tag :friend, params[:friend], placeholder: "Name or email", autofocus: true, class: "form-control form-control-lg", id: "user-input" %>
+      </div>
+      <div class="col-sm-3 no-left-padding">
+        <%= button_tag type: :submit, class: "btn btn-success", id: "form-submit-button-friends", data: { url: search_user_path } do %>
+          <%= fa_icon 'search 2x' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div id="friend-results">
+</div>
 
 <% if !@friends.empty? %>
   <%= render 'friends/friends_list' %>

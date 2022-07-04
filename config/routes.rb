@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   get 'my_portfolio', to: 'users#my_portfolio'
   get 'my_friends', to: 'users#my_friends'
   get 'search_stock', to: 'stocks#search', defaults: { format: 'js' }
+  get 'search_user', to: 'users#search_users', defaults: { format: 'js' }
+  resources :friendships, only: [:create, :destroy]
+  resources :users, only: [:show]
 end
