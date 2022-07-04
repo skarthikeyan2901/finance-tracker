@@ -4,13 +4,21 @@
   <h3>Search stocks</h3>
   <%= form_tag "javascript:void(0)", remote: true, method: :get do %>
     <div class="form-group row">
-      <div class="col-sm-9 no-right-padding">
+      <div class="col-sm-8 no-right-padding">
         <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker", autofocus: true, class: "form-control form-control-lg", id: "stock-input" %>
       </div>
-      <div class="col-sm-3 no-left-padding">
+      <div class="col-sm-1 no-left-padding">
         <%= button_tag type: :submit, class: "btn btn-success", id: "form-submit-button", data: { url: search_stock_path } do %>
           <%= fa_icon 'search 2x' %>
         <% end %>
+      </div>
+      <div class="col-sm-1">
+        <%= button_tag type: :submit, class: "btn btn-success", id: "form-submit-button", data: { url: search_stock_path } do %>
+          <%= fa_icon 'refresh 2x' %>
+        <% end %>
+      </div>
+      <div class="col-sm-2">
+        <%= link_to "Check stock tickers", "https://stockanalysis.com/stocks/", class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>
