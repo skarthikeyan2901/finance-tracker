@@ -13,3 +13,12 @@
 .results-block {
   display: inline-block !important
 }
+
+.logout-button {
+  margin-right: 10px;
+}
+
+.user-name {
+  margin-top: 3.5%;
+  padding-right: 8px
+}
