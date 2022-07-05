@@ -2,19 +2,19 @@
   <%= render 'layouts/messages' %>
 </div>
 <% if @friends %>
-  <div class="card card-header results-block">
-    <table class="col-md-12">
+  <div>
+    <table class="table table-bordered">
       <tbody>
         <% @friends.each do |friend| %>
         <tr>
           <td class="pr-4"><strong>Name: </strong><%= friend.full_name %></td>
           <td class="pr-4"><strong>Email: </strong><%= friend.email %></td>
-          <td class="pr-4"><%= link_to 'View Profile', user_path(friend), class: "btn btn-primary btn-sm" %></td>
-          <td>
+          <td class="d-flex justify-content-around">
+            <%= link_to 'View Profile', user_path(friend), class: "btn btn-primary btn-sm" %>
             <% if current_user.not_friends_with?(friend.id) %>
               <%= link_to 'Follow user?', friendships_path(friend: friend), class: "btn btn-success btn-sm", data: { turbo_method: :post } %>
             <% else %>
-              <span class="badge badge-secondary">You are friends</span>
+              <span class="badge badge-secondary d-flex align-items-center" style="height: 25px;">You are friends</span>
             <% end %>
           </td>
         </tr>

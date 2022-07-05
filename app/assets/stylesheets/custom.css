@@ -22,3 +22,8 @@
   margin-top: 3.5%;
   padding-right: 8px
 }
+
+.check-stock-symbol-button {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}

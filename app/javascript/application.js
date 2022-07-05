@@ -3,7 +3,10 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 jQuery("#form-submit-button").on("click", function(event) {
-  // event.preventDefault();
+  var results = jQuery("#results");
+  results.hide();
+  var spinner = jQuery("#results-spinner");
+  spinner.show();
   var formButtonElement = jQuery("#form-submit-button");
   var formInput = jQuery("#stock-input");
   var stock = formInput.val();
@@ -12,13 +15,18 @@ jQuery("#form-submit-button").on("click", function(event) {
     data: { stock: stock },
     method: 'GET',
     success: function(result) {
+      spinner.hide();
+      results.show();
       console.log(result)
     }
   })
 })
 
 jQuery("#form-submit-button-friends").on("click", function(event) {
-  // event.preventDefault();
+  var results = jQuery("#friend-results");
+  results.hide();
+  var spinner = jQuery("#results-spinner-friends");
+  spinner.show();
   var formButtonElement = jQuery("#form-submit-button-friends");
   var formInput = jQuery("#user-input");
   var friend = formInput.val();
@@ -27,6 +35,8 @@ jQuery("#form-submit-button-friends").on("click", function(event) {
     data: { friend: friend },
     method: 'GET',
     success: function(result) {
+      spinner.hide();
+      results.show();
       console.log(result)
     }
   })

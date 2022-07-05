@@ -13,15 +13,21 @@
         <% end %>
       </div>
       <div class="col-sm-1">
-        <%= button_tag type: :submit, class: "btn btn-success", id: "form-submit-button", data: { url: search_stock_path } do %>
+        <%= button_tag type: :submit, class: "btn btn-success" do %>
           <%= fa_icon 'refresh 2x' %>
         <% end %>
       </div>
       <div class="col-sm-2">
-        <%= link_to "Check stock tickers", "https://stockanalysis.com/stocks/", class: "btn btn-primary" %>
+        <%= link_to "Check stock symbols", "https://stockanalysis.com/stocks/", class: "check-stock-symbol-button btn btn-primary" %>
       </div>
     </div>
   <% end %>
+</div>
+
+<div id="results-spinner" style="display: none;">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only text-black">Loading...</span>
+  </div>
 </div>
 
 <div id="results">
