@@ -4,7 +4,7 @@
   <h3>Search stocks</h3>
   <%= form_tag "javascript:void(0)", remote: true, method: :get do %>
     <div class="form-group row">
-      <div class="col-sm-8 no-right-padding">
+      <div class="col-sm-7 no-right-padding">
         <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker", autofocus: true, class: "form-control form-control-lg", id: "stock-input" %>
       </div>
       <div class="col-sm-1 no-left-padding">
@@ -17,8 +17,8 @@
           <%= fa_icon 'refresh 2x' %>
         <% end %>
       </div>
-      <div class="col-sm-2">
-        <%= link_to "Check stock symbols", "https://stockanalysis.com/stocks/", class: "check-stock-symbol-button btn btn-primary" %>
+      <div class="col-sm-3">
+        <%= link_to "Check stock symbols", "https://stockanalysis.com/stocks/", class: "btn btn-primary btn-md" %>
       </div>
     </div>
   <% end %>

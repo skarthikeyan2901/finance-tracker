@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between">
+  <h2><%= @stock.name %></h2>
+  <%= link_to '#', class: "btn btn-info d-flex align-items-center" do %>
+    Go to forum
+  <% end %>
+</div>
+
+<div class="d-flex justify-content-around mt-4 mb-2 p-2 rounded-lg bg-light">
+  <div>
+    <strong>Ticker symbol: </strong><%= @stock.ticker %>
+  </div>  
+  <div>
+    <strong>Name: </strong><%= @stock.name %>
+  </div>
+  <div>
+    <strong>Last price: </strong><%= @stock.last_price %>
+  </div>
+</div>  
+
+<div id="change-div" data-url="<%= get_change_path %>" data-ticker="<%= @stock.ticker %>">
+  <div id="spinner-change" style="display: none;">
+    <div class="spinner-border text-primary" role="status">
+    </div>
+    <div>Loading data...</div>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  $(document).ready(function(event) {
+    var spinner = jQuery("#spinner-change");
+    var divToChange = jQuery("#change-div");
+    spinner.show();
+    jQuery.ajax({
+      url: divToChange.data("url"),
+      data: { stock: divToChange.data("ticker") },
+      method: 'GET',
+      success: function(result) {
+        spinner.hide();
+        divToChange.html(result);
+      }
+    })
+  })
+<% end %>

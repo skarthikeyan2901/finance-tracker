@@ -22,4 +22,57 @@ class StocksController < ApplicationController
     end
   end 
 
+  def show
+    @stock = Stock.find(params[:id])
+  end
+
+  # def get_change
+  #   client = IEX::Api::Client.new(
+  #     publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
+  #     endpoint: 'https://sandbox.iexapis.com/v1'
+  #   )
+    
+  #   @change = client.quote(params[:stock]).change_percent_s
+  # end
+
+  # def get_open_price
+  #   client = IEX::Api::Client.new(
+  #     publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
+  #     endpoint: 'https://sandbox.iexapis.com/v1'
+  #   )
+
+  #   @price = client.quote(params[:stock]).open
+  # end
+
+  # def get_close_price
+  #   client = IEX::Api::Client.new(
+  #     publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
+  #     endpoint: 'https://sandbox.iexapis.com/v1'
+  #   )
+
+  #   @price = client.quote(params[:stock]).close
+  # end
+
+  # def get_volume
+  #   client = IEX::Api::Client.new(
+  #     publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
+  #     endpoint: 'https://sandbox.iexapis.com/v1'
+  #   )
+
+  #   @volume = client.quote(params[:stock]).latest_volume
+  # end
+
+  def get_change
+    client = IEX::Api::Client.new(
+      publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
+      endpoint: 'https://sandbox.iexapis.com/v1'
+    )
+
+    @ytd_change = client.quote(params[:stock]).ytd_change
+    @volume = client.quote(params[:stock]).latest_volume
+    @close_price = client.quote(params[:stock]).close
+    @open_price = client.quote(params[:stock]).open
+    @change = client.quote(params[:stock]).change_percent_s
+  end
+
 end

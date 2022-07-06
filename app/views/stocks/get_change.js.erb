@@ -1,0 +1,68 @@
+<div class="row mt-4">
+
+  <div id="open-price-div" class="col-sm-3">
+    <div class="card text-center">
+      <div class="h5 card-header">Open Price</div>
+      <div class="h4 p-2 d-inline-block mt-2"><%= @open_price %></div>
+    </div>
+  </div>
+
+  <div id="chart" class="col-sm-9">Chart</div>
+
+</div>
+
+<div class="row mt-4">
+
+  <div id="close-price-div" class="col-sm-3">
+    <div class="card text-center">
+      <div class="h5 card-header">Close Price</div>
+      <div class="h4 p-2 d-inline-block mt-2"><%= @close_price %></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row mt-4">
+
+  <div id="change-div" class="col-sm-3">
+    <div class="card text-center">
+      <div class="h5 card-header">Daily Change %</div>
+      <% if @change[0..0] == '+' %>
+        <div class="text-success h4 p-2">
+          <%= fa_icon 'arrow-up' %>
+          <div class="d-inline-block mt-2"><%= @change %></div>
+        </div>
+      <% else %>
+        <div class="text-danger h4">
+          <%= fa_icon 'arrow-down' %>
+          <div class="d-inline-block mt-2"><%= @change %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="volume-div" class="col-sm-3">
+    <div class="card text-center">
+      <div class="h5 card-header">Latest Volume</div>
+      <div class="h4 p-2 d-inline-block mt-2"><%= @volume %></div>
+    </div>
+  </div>
+  
+  <div id="ytdchange-div" class="col-sm-3">
+    <div class="card text-center">
+      <div class="h5 card-header">Year to Date Change %</div>
+      <% if @ytd_change > 0 %>
+        <div class="text-success h4 p-2">
+          <%= fa_icon 'arrow-up' %>
+          <div class="d-inline-block mt-2"><%= @ytd_change.round(2) %></div>
+        </div>
+      <% else %>
+        <div class="text-danger h4 p-2">
+          <%= fa_icon 'arrow-down' %>
+          <div class="d-inline-block mt-2"><%= @ytd_change.round(2) %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
