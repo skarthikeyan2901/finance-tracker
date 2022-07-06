@@ -26,42 +26,6 @@ class StocksController < ApplicationController
     @stock = Stock.find(params[:id])
   end
 
-  # def get_change
-  #   client = IEX::Api::Client.new(
-  #     publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
-  #     endpoint: 'https://sandbox.iexapis.com/v1'
-  #   )
-    
-  #   @change = client.quote(params[:stock]).change_percent_s
-  # end
-
-  # def get_open_price
-  #   client = IEX::Api::Client.new(
-  #     publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
-  #     endpoint: 'https://sandbox.iexapis.com/v1'
-  #   )
-
-  #   @price = client.quote(params[:stock]).open
-  # end
-
-  # def get_close_price
-  #   client = IEX::Api::Client.new(
-  #     publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
-  #     endpoint: 'https://sandbox.iexapis.com/v1'
-  #   )
-
-  #   @price = client.quote(params[:stock]).close
-  # end
-
-  # def get_volume
-  #   client = IEX::Api::Client.new(
-  #     publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
-  #     endpoint: 'https://sandbox.iexapis.com/v1'
-  #   )
-
-  #   @volume = client.quote(params[:stock]).latest_volume
-  # end
-
   def get_change
     client = IEX::Api::Client.new(
       publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
@@ -75,6 +39,9 @@ class StocksController < ApplicationController
     @change = client.quote(params[:stock]).change_percent_s
     historical_prices = client.historical_prices(params[:stock])
     @price_data = construct_hash_for_chart(historical_prices)
+  end
+
+  def forum
   end
 
   private

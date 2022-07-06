@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between">
   <h2><%= @stock.name %></h2>
-  <%= link_to '#', class: "btn btn-info d-flex align-items-center" do %>
+  <%= link_to forum_stocks_path(id: @stock.id), class: "btn btn-info d-flex align-items-center" do %>
     Go to forum
   <% end %>
 </div>
@@ -13,7 +13,7 @@
     <strong>Name: </strong><%= @stock.name %>
   </div>
   <div>
-    <strong>Last price: </strong><%= @stock.last_price %>
+    <strong>Last price: </strong>$<%= @stock.last_price %>
   </div>
 </div>  
 
