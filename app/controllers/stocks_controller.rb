@@ -1,9 +1,11 @@
 class StocksController < ApplicationController
   protect_from_forgery except: :search
+  before_action :check_if_user_is_tracking_stock, only: [:forum]
 
   def search
-    if params[:stock].present?
-      @stock = Stock.new_lookup(params[:stock])
+    stock_ticker = params[:stock].upcase
+    if stock_ticker.present?
+      @stock = Stock.new_lookup(stock_ticker)
       if @stock
         respond_to do |format|
           format.js { render partial: 'stocks/results' }
@@ -32,12 +34,14 @@ class StocksController < ApplicationController
       endpoint: 'https://sandbox.iexapis.com/v1'
     )
 
-    @ytd_change = client.quote(params[:stock]).ytd_change
-    @volume = client.quote(params[:stock]).latest_volume
-    @close_price = client.quote(params[:stock]).close
-    @open_price = client.quote(params[:stock]).open
-    @change = client.quote(params[:stock]).change_percent_s
-    historical_prices = client.historical_prices(params[:stock])
+    stock_ticker = params[:stock].upcase
+
+    @ytd_change = client.quote(stock_ticker).ytd_change
+    @volume = client.quote(stock_ticker).latest_volume
+    @close_price = client.quote(stock_ticker).close
+    @open_price = client.quote(stock_ticker).open
+    @change = client.quote(stock_ticker).change_percent_s
+    historical_prices = client.historical_prices(stock_ticker)
     @price_data = construct_hash_for_chart(historical_prices)
   end
 
@@ -72,6 +76,13 @@ class StocksController < ApplicationController
       prices[date_of_data] = closing_price
     end
     prices
+  end
+
+  def check_if_user_is_tracking_stock
+    if UserStock.where(user: current_user, stock: params[:id]).blank?
+      flash[:alert] = "You are not tracking this stock!"
+      redirect_to my_portfolio_path
+    end
   end
 
 end

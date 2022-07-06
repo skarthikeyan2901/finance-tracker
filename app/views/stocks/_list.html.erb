@@ -12,7 +12,7 @@
         <tbody>
           <% @tracked_stocks.each do |stock| %>
             <tr>
-              <th scope="row"><%= link_to stock.ticker, stock_path(stock), class: "text-dark" %></th>
+              <th scope="row"><%= link_to stock.ticker, stock_path(stock) %></th>
               <td><%= stock.name %></td>
               <td>$<%= stock.last_price %></td>
               <td class="text-center">

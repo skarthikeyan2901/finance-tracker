@@ -5,7 +5,7 @@
   <%= form_tag "javascript:void(0)", remote: true, method: :get do %>
     <div class="form-group row">
       <div class="col-sm-7 no-right-padding">
-        <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker", autofocus: true, class: "form-control form-control-lg", id: "stock-input" %>
+        <%= text_field_tag :stock, params[:stock], placeholder: "Enter stock ticker", autofocus: true, class: "form-control form-control-lg", id: "stock-input" %>
       </div>
       <div class="col-sm-1 no-left-padding">
         <%= button_tag type: :submit, class: "btn btn-success", id: "form-submit-button", data: { url: search_stock_path } do %>
@@ -18,7 +18,7 @@
         <% end %>
       </div>
       <div class="col-sm-3">
-        <%= link_to "Check stock symbols", "https://stockanalysis.com/stocks/", class: "btn btn-primary btn-md" %>
+        <%= link_to "Check stock tickers", "https://stockanalysis.com/stocks/", class: "btn btn-primary btn-md" %>
       </div>
     </div>
   <% end %>
