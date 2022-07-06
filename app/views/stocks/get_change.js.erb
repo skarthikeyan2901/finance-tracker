@@ -1,28 +1,28 @@
 <div class="row mt-4">
 
-  <div id="open-price-div" class="col-sm-3">
-    <div class="card text-center">
-      <div class="h5 card-header">Open Price</div>
-      <div class="h4 p-2 d-inline-block mt-2"><%= @open_price %></div>
+  <div class="col-sm-3 d-flex flex-column justify-content-around">
+    <div id="open-price-div">
+      <div class="card text-center">
+        <div class="h5 card-header">Open Price</div>
+        <div class="h4 p-2 d-inline-block mt-2"><%= @open_price %></div>
+      </div>
+    </div>
+
+    <div id="close-price-div">
+      <div class="card text-center">
+        <div class="h5 card-header">Close Price</div>
+        <div class="h4 p-2 d-inline-block mt-2"><%= @close_price %></div>
+      </div>
     </div>
   </div>
 
-  <div id="chart" class="col-sm-9">Chart</div>
-
-</div>
-
-<div class="row mt-4">
-
-  <div id="close-price-div" class="col-sm-3">
-    <div class="card text-center">
-      <div class="h5 card-header">Close Price</div>
-      <div class="h4 p-2 d-inline-block mt-2"><%= @close_price %></div>
-    </div>
+  <div id="chart" class="col-sm-9">
+    <%= area_chart @price_data %>
   </div>
 
 </div>
 
-<div class="row mt-4">
+<div class="row mt-4 d-flex justify-content-around">
 
   <div id="change-div" class="col-sm-3">
     <div class="card text-center">

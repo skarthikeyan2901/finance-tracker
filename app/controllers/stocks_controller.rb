@@ -73,6 +73,19 @@ class StocksController < ApplicationController
     @close_price = client.quote(params[:stock]).close
     @open_price = client.quote(params[:stock]).open
     @change = client.quote(params[:stock]).change_percent_s
+    historical_prices = client.historical_prices(params[:stock])
+    @price_data = construct_hash_for_chart(historical_prices)
+  end
+
+  private
+  def construct_hash_for_chart(historical_prices)
+    prices = Hash.new
+    historical_prices.each do |data|
+      date_of_data = data["date"]
+      closing_price = data["close"]
+      prices[date_of_data] = closing_price
+    end
+    prices
   end
 
 end
