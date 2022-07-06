@@ -4,7 +4,7 @@ import "controllers"
 import "chartkick"
 import "Chart.bundle"
 
-jQuery("#form-submit-button").on("click", function(event) {
+jQuery(document).on("click", "#form-submit-button", function(event) {
   var results = jQuery("#results");
   results.hide();
   var spinner = jQuery("#results-spinner");
@@ -12,6 +12,8 @@ jQuery("#form-submit-button").on("click", function(event) {
   var formButtonElement = jQuery("#form-submit-button");
   var formInput = jQuery("#stock-input");
   var stock = formInput.val();
+  console.log("pressed");
+  debugger;
   jQuery.ajax({
     url: formButtonElement.data("url"),
     data: { stock: stock },
@@ -24,7 +26,7 @@ jQuery("#form-submit-button").on("click", function(event) {
   })
 })
 
-jQuery("#form-submit-button-friends").on("click", function(event) {
+jQuery(document).on("click", "#form-submit-button-friends", function(event) {
   var results = jQuery("#friend-results");
   results.hide();
   var spinner = jQuery("#results-spinner-friends");
@@ -32,6 +34,8 @@ jQuery("#form-submit-button-friends").on("click", function(event) {
   var formButtonElement = jQuery("#form-submit-button-friends");
   var formInput = jQuery("#user-input");
   var friend = formInput.val();
+  console.log("pressed");
+  debugger;
   jQuery.ajax({
     url: formButtonElement.data("url"),
     data: { friend: friend },

@@ -1,0 +1,35 @@
+<h1>Forum</h1>
+
+<div class="d-flex bg-light overflow-auto mb-2" id="messages-wrapper" style="height: 60vh">
+  <div class="p-4" id="messages-container">
+    <% @messages.each do |message| %>
+      <%= render 'stocks/messages', message: message %>
+    <% end %>
+  </div>
+</div>
+
+<%= form_tag "javascript:void(0)", remote: true, method: :get do %>
+  <%= text_field_tag :message, params[:stock], placeholder: "Enter message", class: "form-control form-control-lg", id: "message-value" %>
+  <%= button_tag type: :submit, class: "btn btn-success", id: "enter-message", data:{ url: forum_submit_stocks_path, stock_id: @stock } do %>
+    Enter
+  <% end %>
+<% end %>
+
+<%= javascript_tag do %>
+  $("#enter-message").on("click", function(event) {
+    var divToChange = jQuery("#messages-container");
+    var button = jQuery("#enter-message");
+    var message = jQuery("#message-value").val();
+    var messageWrapper = jQuery("#messages-wrapper");
+    jQuery.ajax({
+      url: button.data("url"),
+      data: { message: message, stock_id: button.data("stock-id") },
+      method: 'GET',
+      success: function(result) {
+        divToChange.append(result);
+        jQuery(messageWrapper).scrollTop(messageWrapper.prop("scrollHeight"));
+        jQuery("#message-value").val("");
+      }
+    })
+  })
+<% end %>

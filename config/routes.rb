@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   resources :user_stocks, only: [:create, :destroy]
   devise_for :users
   root 'welcome#index'
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   resources :stocks, only: [:show] do
     collection do
       get :forum
+      get :forum_submit, defaults: { format: 'js' }
     end
   end
 end

@@ -42,6 +42,25 @@ class StocksController < ApplicationController
   end
 
   def forum
+    if Stock.where(id: params[:id]).exists?
+      @messages = Message.where(stock_id: params[:id])
+      @stock = params[:id]
+    else
+      flash[:alert] = "Unknown stock!"
+      redirect_to my_portfolio_path
+    end
+  end
+
+  def forum_submit
+    message_data = params["message"]
+    stock = params["stock_id"]
+    # binding.break
+    message = Message.new(content: message_data, user_id: current_user.id, stock_id: stock)
+    message.save()
+
+    @message_content = params["message"]
+    @username = current_user
+    @time = message.created_at
   end
 
   private
