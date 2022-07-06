@@ -17,7 +17,7 @@
   </div>
 
   <div id="chart" class="col-sm-9">
-    <%= area_chart @price_data %>
+    <%= area_chart @price_data, min: nil, xtitle: "Date", ytitle: "Closing price" %>
   </div>
 
 </div>

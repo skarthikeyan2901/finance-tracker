@@ -17,7 +17,7 @@
   </div>
 </div>  
 
-<div id="change-div" data-url="<%= get_change_path %>" data-ticker="<%= @stock.ticker %>">
+<div id="change-div" data-url="<%= get_change_path %>" data-ticker="<%= @stock.ticker %>" class="d-flex justify-content-center align-items-center pb-5" style="height: 70vh;">
   <div id="spinner-change" style="display: none;">
     <div class="spinner-border text-primary" role="status">
     </div>
@@ -36,6 +36,8 @@
       method: 'GET',
       success: function(result) {
         spinner.hide();
+        divToChange.removeClass("d-flex justify-content-center align-items-center pb-5");
+        divToChange.removeAttr("style")
         divToChange.html(result);
       }
     })
