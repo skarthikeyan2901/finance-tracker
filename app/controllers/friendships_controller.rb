@@ -14,7 +14,7 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    binding.break
+    # binding.break
     if User.where(id: params[:id]).blank?
       flash[:alert] = "No such user!"
       redirect_to my_friends_path and return

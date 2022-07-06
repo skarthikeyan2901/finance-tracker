@@ -9,7 +9,7 @@
         <td class="pr-4"></td>
         <td>
           <% if current_user.not_friends_with?(@user.id) %>
-            <%= link_to 'Follow user?', friendships_path(friend: @user), class: "btn btn-success btn-sm", data: { turbo_method: :post } %>
+            <%= link_to 'Follow user', friendships_path(friend: @user), class: "btn btn-success btn-sm", data: { turbo_method: :post } %>
           <% else %>
             <span class="badge badge-secondary">You are friends</span>
           <% end %>
@@ -22,5 +22,5 @@
 <% if !@tracked_stocks.empty? %>
   <%= render 'stocks/list' %>
 <% else %>
-  <p class="lead">This user is not tracking any stocks</p>
+  <p class="lead d-flex justify-content-center mt-4">This user is not tracking any stocks</p>
 <% end %>
