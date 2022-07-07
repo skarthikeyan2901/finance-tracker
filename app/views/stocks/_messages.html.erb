@@ -1,11 +1,11 @@
 <div class="mt-2">
-  <div class="card card-header">
-    <div>
-      <%= message.content %>
+  <div class="card card-header" style="width: 155vh;">
+    <div class="d-flex justify-content-between">
       <strong><%= message.user.full_name %></strong>
+      <%= time_ago_in_words(message.created_at) %> ago
     </div>
-    <div>
-      <%= time_ago_in_words(message.created_at) %>
+    <div class="w-75">
+      <%= message.content %>
     </div>
   </div>
 </div>

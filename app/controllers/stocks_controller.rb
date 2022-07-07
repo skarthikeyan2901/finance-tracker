@@ -25,7 +25,12 @@ class StocksController < ApplicationController
   end 
 
   def show
-    @stock = Stock.find(params[:id])
+    if Stock.where(id: params[:id]).exists?
+      @stock = Stock.find(params[:id])
+    else
+      flash[:alert] = "Unknown stock!"
+      redirect_to my_portfolio_path
+    end
   end
 
   def get_change
@@ -79,8 +84,12 @@ class StocksController < ApplicationController
   end
 
   def check_if_user_is_tracking_stock
+    if Stock.where(id: params[:id]).blank?
+      flash[:alert] = "Unkown stock!"
+      redirect_to my_portfolio_path and return
+    end
     if UserStock.where(user: current_user, stock: params[:id]).blank?
-      flash[:alert] = "You are not tracking this stock!"
+      flash[:alert] = "You have to be tracking this stock to access the forum!"
       redirect_to my_portfolio_path
     end
   end
