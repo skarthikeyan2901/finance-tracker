@@ -4,6 +4,11 @@ class FriendshipsController < ApplicationController
       flash[:alert] = "No such user!"
       redirect_to my_friends_path and return
     end
+    # binding.break
+    if current_user.friendships.where(friend_id: params[:friend]).present?
+      flash[:alert] = "Already following this user!"
+      redirect_to my_friends_path and return
+    end
     current_user.friendships.build(friend_id: params[:friend])
     if current_user.save
       flash[:notice] = "Following friend!"

@@ -63,13 +63,17 @@ class StocksController < ApplicationController
   def forum_submit
     message_data = params["message"]
     stock = params["stock_id"]
-    # binding.break
-    message = Message.new(content: message_data, user_id: current_user.id, stock_id: stock)
-    message.save()
+    if Stock.find_by(id: stock).present? and current_user.stocks.where(id: stock).present?
+      message = Message.new(content: message_data, user_id: current_user.id, stock_id: stock)
+      message.save()
 
-    @message_content = params["message"]
-    @username = current_user
-    @time = message.created_at
+      @message_content = params["message"]
+      @username = current_user
+      @time = message.created_at
+    else
+      @failed = true
+      flash[:alert] = "You are not following this stock!"
+    end
   end
 
   def refresh_prices

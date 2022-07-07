@@ -37,15 +37,20 @@
       data: { message: message, stock_id: button.data("stock-id") },
       method: 'GET',
       success: function(result) {
-        <%# if(divToChange.text != "No messages to show! Start a conversation!") {
-          divToChange.html(result);
-        }
+        debugger;
+        if(result.includes("Failed"))
+          window.location.href = "/my_portfolio"
         else {
+          <%# if(divToChange.text != "No messages to show! Start a conversation!") {
+            divToChange.html(result);
+          }
+          else {
+            divToChange.append(result);
+          } %>
           divToChange.append(result);
-        } %>
-        divToChange.append(result);
-        jQuery(messageWrapper).scrollTop(messageWrapper.prop("scrollHeight"));
-        jQuery("#message-value").val("");
+          jQuery(messageWrapper).scrollTop(messageWrapper.prop("scrollHeight"));
+          jQuery("#message-value").val("");
+        }
       }
     })
   })

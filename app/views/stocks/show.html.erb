@@ -1,7 +1,9 @@
 <div class="d-flex justify-content-between">
   <h2><%= @stock.name %></h2>
-  <%= link_to forum_stocks_path(id: @stock.id), class: "btn btn-info d-flex align-items-center" do %>
-    Go to forum
+  <% if current_user.stocks.where(id: @stock.id).present? %>
+    <%= link_to forum_stocks_path(id: @stock.id), class: "btn btn-info d-flex align-items-center" do %>
+      Go to forum
+    <% end %>
   <% end %>
 </div>
 

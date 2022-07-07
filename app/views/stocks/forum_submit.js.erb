@@ -1,11 +1,15 @@
-<div class="mt-2">
-  <div class="card card-header" style="width: 155vh;">
-    <div class="d-flex justify-content-between">
-      <strong><%= @username.full_name %></strong>
-      now
-    </div>
-    <div class="w-75">
-      <%= @message_content %>
+<% if @failed.present? %>
+  "Failed"
+<% else %>
+  <div class="mt-2">
+    <div class="card card-header" style="width: 155vh;">
+      <div class="d-flex justify-content-between">
+        <strong><%= @username.full_name %></strong>
+        now
+      </div>
+      <div class="w-75">
+        <%= @message_content %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
