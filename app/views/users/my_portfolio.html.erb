@@ -13,7 +13,7 @@
         <% end %>
       </div>
       <div class="col-sm-1">
-        <%= button_tag type: :submit, class: "btn btn-success" do %>
+        <%= button_tag type: :submit, class: "btn btn-success", id: "refresh-prices-button", data: { url: refresh_prices_stocks_path } do %>
           <%= fa_icon 'refresh 2x' %>
         <% end %>
       </div>
@@ -33,7 +33,40 @@
 <div id="results">
 </div>
 
-<% if !@tracked_stocks.empty? %>
-  <%= render 'stocks/list' %>
+<div id="tracked-stocks">
+  <div id="stocks">
+    <% if !@tracked_stocks.empty? %>
+      <%= render 'stocks/list' %>
+    <% end %>
+  </div>
+</div>
+
+<div id="tracked-stocks-spinner" style="display: none;">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only text-black">Loading...</span>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  jQuery(document).on("click", "#refresh-prices-button", function(event) {
+    var divToChange = jQuery("#tracked-stocks");
+    var button = jQuery("#refresh-prices-button");
+    var spinner = jQuery("#tracked-stocks-spinner");
+    var stocks = jQuery("#stocks");
+    stocks.hide();
+    spinner.addClass("d-flex justify-content-center");
+    spinner.show();
+    jQuery.ajax({
+      url: button.data("url"),
+      data: {},
+      method: 'GET',
+      success: function(result) {
+        spinner.hide();
+        spinner.removeClass("d-flex justify-content-center");
+        stocks.html(result);
+        stocks.show();
+      }
+    })
+  })
 <% end %>
 

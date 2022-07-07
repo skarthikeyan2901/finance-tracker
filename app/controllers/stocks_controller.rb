@@ -72,6 +72,28 @@ class StocksController < ApplicationController
     @time = message.created_at
   end
 
+  def refresh_prices
+    # binding.break
+    client = IEX::Api::Client.new(
+      publishable_token: Rails.application.credentials.iex_client[:sandbox_api_key],
+      endpoint: 'https://sandbox.iexapis.com/v1'
+    )
+    tracked_stocks = current_user.stocks
+    tracked_stocks.each do |stock|
+      price = client.price(stock["ticker"])
+      stock = Stock.find_by(id: stock["id"])
+      if stock.blank?
+        flash[:alert] = "Error while refreshing"
+        redirect_to my_portfolio_path and return
+      end
+      # binding.break
+      stock.last_price = price
+      stock.save!
+    end
+    @tracked_stocks = current_user.stocks.reload
+    @user = current_user
+  end
+
   private
   def construct_hash_for_chart(historical_prices)
     prices = Hash.new

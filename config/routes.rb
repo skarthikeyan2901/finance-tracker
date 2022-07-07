@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     collection do
       get :forum
       get :forum_submit, defaults: { format: 'js' }
+      get :refresh_prices, defaults: { format: 'js' }
     end
   end
 end
